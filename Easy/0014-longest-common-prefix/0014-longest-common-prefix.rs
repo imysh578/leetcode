@@ -9,7 +9,7 @@ impl Solution {
 
         for i in 0..prefix_max_len {
             let current_char = first_str.as_bytes()[i];
-            for word in &strs {
+            for word in strs.iter().skip(1) {
                 if word.len() <= i || word.as_bytes()[i] != current_char {
                     return first_str[..i].to_string();
                 }
