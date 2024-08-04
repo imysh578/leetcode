@@ -4,18 +4,14 @@ impl Solution {
             return false;
         }
 
-        let mut temp_x = x;
-        let mut reserved_x = 0;
+        let mut reversed_x = 0;
+        let mut temp_value = x;
 
-        while temp_x > 0 {
-            reserved_x = reserved_x * 10 + temp_x % 10;
-            temp_x /= 10;
+        while temp_value > 0 {
+            reversed_x = reversed_x * 10 + temp_value % 10;
+            temp_value /= 10;
         }
 
-        if reserved_x != x {
-            return false;
-        }
-
-        return true;
+        x == reversed_x
     }
 }
