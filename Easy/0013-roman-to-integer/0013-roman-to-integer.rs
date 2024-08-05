@@ -3,8 +3,8 @@ impl Solution {
         let mut result = 0;
         let mut prev = 0;
 
-        for c in s.chars().rev() {
-            let current = match c {
+        for c in s.chars() {
+            let converted_num = match c {
                 'I' => 1,
                 'V' => 5,
                 'X' => 10,
@@ -14,8 +14,15 @@ impl Solution {
                 'M' => 1000,
                 _ => 0,
             };
-            result += if current < prev {-current} else {current};
-            prev = current;
+
+            println!("{}", converted_num);
+
+            result += if prev < converted_num {
+                converted_num - 2 * prev
+            } else {
+                converted_num
+            };
+            prev = converted_num;
         }
 
         result
