@@ -4,14 +4,14 @@ impl Solution {
             return false;
         }
 
-        let mut reversed_x = 0;
-        let mut temp_value = x;
+        let mut y = x;
+        let mut z = 0;
 
-        while temp_value > 0 {
-            reversed_x = reversed_x * 10 + temp_value % 10;
-            temp_value /= 10;
+        while y > 0 {
+            z = z * 10 + y % 10;
+            y /= 10;
         }
 
-        x == reversed_x
+        z == x
     }
 }
