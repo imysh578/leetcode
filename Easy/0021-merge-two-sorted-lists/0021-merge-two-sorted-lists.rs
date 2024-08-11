@@ -16,19 +16,31 @@
 // }
 impl Solution {
     pub fn merge_two_lists(list1: Option<Box<ListNode>>, list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        match (list1, list2) {
-            (None, None) => None,
-            (None, Some(list2)) => Some(list2),
-            (Some(list1), None) => Some(list1),
-            (Some(mut l1), Some(mut l2)) => {
-                if l1.val < l2.val {
-                    l1.next = Self::merge_two_lists(l1.next, Some(l2));
-                    Some(l1)
-                } else {
-                    l2.next = Self::merge_two_lists(Some(l1), l2.next);
-                    Some(l2)
-                }
+        let mut result = ListNode::new(0);
+        let mut pointer = &mut result;
+        
+        let mut l1 = list1.clone();
+        let mut l2 = list2.clone();
+
+        while let (Some(node1), Some(node2)) = (l1.as_mut(), l2.as_mut()) {
+            if node1.val < node2.val {
+                pointer.next = l1.clone();
+                l1 = l1.unwrap().next;
+            } else {
+                pointer.next = l2.clone();
+                l2 = l2.unwrap().next;
             }
+            pointer = pointer.next.as_mut().unwrap();
         }
+
+        if l1.is_some() {
+            pointer.next = l1;
+        }
+
+        if l2.is_some() {
+            pointer.next = l2;
+        }
+
+        result.next
     }
 }
